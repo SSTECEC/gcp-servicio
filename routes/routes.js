@@ -23,10 +23,14 @@ router.post('/resetearPassword', controladores.usuario.resetearPassword);
 router.get('/listarSede', auth.seguridad ,controladores.sede.listarSede);
 router.get('/listarSedeDetalles', controladores.sede.listarSedeDetalles);
 router.get('/listarSedeDetallesParametro', controladores.sede.listarSedeDetallesParametro);
+router.get('/listarSedeDetallesAll', controladores.sede.listarSedeDetallesAll);
+
 // Departamento
 router.get('/listarTipoDepartamento', controladores.tipodepartamento.listarTipoDepartamento);
 router.get('/listarDepartamentos', controladores.departamento.listarDepartamentos);
 router.get('/listarRegistrosDepartamento', controladores.departamento.listarRegistrosDepartamento);
+router.get('/listarDepartamentosAulas', controladores.departamento.listarDepartamentosAulas);
+
 // Insumos
 router.get('/listarInsumos', controladores.insumos.listarInsumos);
 router.get('/listarDepartamentoInsumos', controladores.departamentoinsumos.listarDepartamentoInsumos);
@@ -37,7 +41,9 @@ router.get('/listarRoles', controladores.rol.listarRoles);
 router.get('/listarInsumoEspecifico', controladores.insumos.listarInsumoEspecifico);
 router.get('/listarDetalleInsumosDisponibles', controladores.departamentoinsumos.listarDetalleInsumosDisponibles);
 router.get('/actualizarEstadoAsignacionDetalleInsumo', controladores.insumos.actualizarEstadoAsignacionDetalleInsumo);
-
+router.get('/listarInsumosDisponiblesDepartamento', controladores.departamentoinsumos.listarInsumosDisponiblesDepartamento);
+// Reserva 
+router.get('/listarUltimaFechaReserva', controladores.reserva.listarUltimaFechaReserva);
 
 // POST
 // Usuario
@@ -60,7 +66,9 @@ router.post('/guardarInsumoDetalles', controladores.insumos.guardarInsumoDetalle
 router.post('/actualizarNumeroSerieInsumo', controladores.insumos.actualizarNumeroSerieInsumo);
 router.post('/cambiarEstadoDetalleInsumo', controladores.insumos.cambiarEstadoDetalleInsumo);
 router.post('/actualizarInsumoValores', controladores.insumos.actualizarInsumoValores);
-
+// Reserva 
+router.post('/guardarReserva', controladores.reserva.guardarReserva);
+router.post('/listarReservasExportacion', controladores.reserva.listarReservasExportacion);
 
 
 module.exports = router;

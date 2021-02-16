@@ -5,7 +5,7 @@ const pool = new Pool(config);
 module.exports = {
 
     listarSede : function (req,res) {
-        pool.query('SELECT * FROM sede WHERE estado = 1 ORDER BY "idSede"',
+        pool.query('SELECT * FROM listarsede',
             (err,data) => {
                 if(err)
                 {
@@ -54,6 +54,23 @@ module.exports = {
 
     listarSedeDetallesParametro : function (req,res) {
         pool.query('SELECT * FROM listarsededetalle WHERE "idSede" = $1',
+        [req.query.idSede],
+            (err,data) => {
+                if(err)
+                {
+                    console.log('Surgió un error: \n',err);
+                    res.sendStatus(500);
+                    res.send({ 'Error' : err });
+                }else{
+                    console.log('Transacción Exitosa');
+                    res.send(data.rows);
+                }
+            }
+        );
+    },
+
+    listarSedeDetallesAll : function (req,res) {
+        pool.query('SELECT * FROM listarsededetalleall WHERE "idSede" = $1',
         [req.query.idSede],
             (err,data) => {
                 if(err)

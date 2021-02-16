@@ -85,5 +85,21 @@ module.exports = {
         );
     },
 
+    listarInsumosDisponiblesDepartamento : function (req,res) {
+        pool.query('SELECT * FROM consultarlistadoinsumosdepartamento WHERE "idDepartamento" = $1',[req.query.idDepartamento],
+            (err,data) => {
+                if(err)
+                {
+                    console.log('Surgió un error: \n',err);
+                    res.sendStatus(500);
+                    res.send({ 'Error' : err });
+                }else{
+                    console.log('Transacción Exitosa');
+                    res.send(data.rows);
+                }
+            }
+        );
+    },
+
 
 }

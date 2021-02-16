@@ -133,19 +133,51 @@ module.exports = {
     },
 
     cambiarEstadoDetalleInsumo: function (req, res) {
-        pool.query('UPDATE detalle_insumo SET "estado" = $1 WHERE "idDetalleInsumo" = $2',
-            [req.body.estado, req.body.idDetalleInsumo],
+
+        pool.query('SELECT * FROM insumos WHERE "idInsumo" = $1 AND estado = 1', [req.body.idInsumo],
             (err, data) => {
                 if (err) {
                     console.log('Surgió un error: \n', err);
                     res.sendStatus(500);
                     res.send({ 'Error': err });
                 } else {
-                    console.log('Transacción Exitosa');
-                    res.send(true);
+                    var insumo = data.rows[0]; 
+                    var cantidadDisponible;
+
+                    if(req.body.signoProceso == 'suma'){
+                        cantidadDisponible = parseInt(insumo.disponibles) + 1 ; 
+                    }else{
+                        cantidadDisponible = parseInt(insumo.disponibles) - 1 ; 
+                    }
+
+                    pool.query('UPDATE insumos SET disponibles = $1 WHERE "idInsumo" = $2',
+                        [cantidadDisponible.toString(), req.body.idInsumo],
+                        (err, data) => {
+                            if (err) {
+                                console.log('Surgió un error: \n', err);
+                                res.sendStatus(500);
+                                res.send({ 'Error': err });
+                            } else {
+                                pool.query('UPDATE detalle_insumo SET "estado" = $1 WHERE "idDetalleInsumo" = $2',
+                                    [req.body.estado, req.body.idDetalleInsumo],
+                                    (err, data) => {
+                                        if (err) {
+                                            console.log('Surgió un error: \n', err);
+                                            res.sendStatus(500);
+                                            res.send({ 'Error': err });
+                                        } else {
+                                            console.log('Transacción Exitosa');
+                                            res.send(true);
+                                        }
+                                    }
+                                );
+                            }
+                        }
+                    );
                 }
-            }
+            } 
         );
+
     },
 
     actualizarEstadoAsignacionDetalleInsumo : function (req, res) {
