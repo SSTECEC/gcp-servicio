@@ -33,7 +33,11 @@ module.exports = {
                 }else{
                     var result = data.rows[0]; 
                     console.log('Transacción Exitosa');
-                    res.send({ 'resultado': result, 'token': auth.generar(result) });
+                    if(result != undefined ){
+                        res.send({ 'resultado': result, 'token': auth.generar(result) });
+                    }else{
+                        res.send({ 'resultado': -1 , 'error': 'Credenciales Incorrectas' });
+                    }
                 }
             }
         );
@@ -106,6 +110,22 @@ module.exports = {
                 }else{
                     console.log('Transacción Exitosa');
                     res.send(true);
+                }
+            }
+        );
+    },
+
+    listarUsuarioEspecifico : function (req,res) {
+        pool.query('SELECT "idUsuario" FROM usuario WHERE identificacion = $1',[req.query.identificacion],
+        (err,data) => {
+                if(err)
+                {
+                    console.log('Surgió un error: \n',err);
+                    res.sendStatus(500);
+                    res.send({ 'Error' : err });
+                }else{
+                    console.log('Transacción Exitosa');
+                    res.send(data.rows[0]);
                 }
             }
         );

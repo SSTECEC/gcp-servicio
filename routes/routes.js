@@ -30,6 +30,7 @@ router.get('/listarTipoDepartamento', controladores.tipodepartamento.listarTipoD
 router.get('/listarDepartamentos', controladores.departamento.listarDepartamentos);
 router.get('/listarRegistrosDepartamento', controladores.departamento.listarRegistrosDepartamento);
 router.get('/listarDepartamentosAulas', controladores.departamento.listarDepartamentosAulas);
+router.get('/listarTipoDepartamentoCambiable', controladores.tipodepartamento.listarTipoDepartamentoCambiable);
 
 // Insumos
 router.get('/listarInsumos', controladores.insumos.listarInsumos);
@@ -37,6 +38,7 @@ router.get('/listarDepartamentoInsumos', controladores.departamentoinsumos.lista
 router.get('/listarRegistrosInsumos', controladores.departamentoinsumos.listarRegistrosInsumos);
 router.get('/listarDetalleInsumos', controladores.insumos.listarDetalleInsumos);
 router.get('/listarUsuarios', controladores.usuario.listarUsuarios);
+router.get('/listarUsuarioEspecifico', controladores.usuario.listarUsuarioEspecifico);
 router.get('/listarRoles', controladores.rol.listarRoles);
 router.get('/listarInsumoEspecifico', controladores.insumos.listarInsumoEspecifico);
 router.get('/listarDetalleInsumosDisponibles', controladores.departamentoinsumos.listarDetalleInsumosDisponibles);
@@ -44,6 +46,16 @@ router.get('/actualizarEstadoAsignacionDetalleInsumo', controladores.insumos.act
 router.get('/listarInsumosDisponiblesDepartamento', controladores.departamentoinsumos.listarInsumosDisponiblesDepartamento);
 // Reserva 
 router.get('/listarUltimaFechaReserva', controladores.reserva.listarUltimaFechaReserva);
+router.get('/consultaLogReservas', controladores.reserva.consultaLogReservas);
+router.get('/actualizarReserva', controladores.reserva.actualizarReserva);
+router.get('/listadoCompletoReservaciones', controladores.reserva.listadoCompletoReservaciones);
+router.get('/listadoCompletoReservacionesDisponibles', controladores.reserva.listadoCompletoReservacionesDisponibles);
+router.get('/listadoCompletoReservacionesUsuario', controladores.reserva.listadoCompletoReservacionesUsuario);
+
+// Estadísticas
+router.get('/listarInsumosJson', controladores.estadisticas.listarInsumosJson);
+router.get('/listarReservasTotalesJson', controladores.estadisticas.listarReservasTotalesJson);
+router.get('/listarReservasUsuariosJson', controladores.estadisticas.listarReservasUsuariosJson);
 
 // POST
 // Usuario
@@ -56,6 +68,7 @@ router.post('/actualizarSede', controladores.sede.actualizarSede);
 // Departamento
 router.post('/guardarDepartamento', controladores.departamento.guardarDepartamento);
 router.post('/guardarTipoDepartamento', controladores.tipodepartamento.guardarTipoDepartamento);
+router.post('/actualizarDepartamento', controladores.departamento.actualizarDepartamento);
 // Insumo
 router.post('/guardarInsumos', controladores.insumos.guardarInsumos);
 router.post('/guardarDepartamentoInsumo', controladores.departamentoinsumos.guardarDepartamentoInsumo);
@@ -67,8 +80,10 @@ router.post('/actualizarNumeroSerieInsumo', controladores.insumos.actualizarNume
 router.post('/cambiarEstadoDetalleInsumo', controladores.insumos.cambiarEstadoDetalleInsumo);
 router.post('/actualizarInsumoValores', controladores.insumos.actualizarInsumoValores);
 // Reserva 
+router.post('/guardarLogReserva', controladores.reserva.guardarLogReserva);
 router.post('/guardarReserva', controladores.reserva.guardarReserva);
 router.post('/listarReservasExportacion', controladores.reserva.listarReservasExportacion);
-
+router.post('/actualizarLogReserva', controladores.reserva.actualizarLogReserva);
+router.post('/listadoReservasFiltros', controladores.reserva.listadoReservasFiltros);
 
 module.exports = router;
