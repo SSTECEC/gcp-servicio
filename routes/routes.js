@@ -51,6 +51,7 @@ router.get('/actualizarReserva', controladores.reserva.actualizarReserva);
 router.get('/listadoCompletoReservaciones', controladores.reserva.listadoCompletoReservaciones);
 router.get('/listadoCompletoReservacionesDisponibles', controladores.reserva.listadoCompletoReservacionesDisponibles);
 router.get('/listadoCompletoReservacionesUsuario', controladores.reserva.listadoCompletoReservacionesUsuario);
+router.get('/cancelarReserva', controladores.reserva.cancelarReserva);
 
 // Estadísticas
 router.get('/listarInsumosJson', controladores.estadisticas.listarInsumosJson);

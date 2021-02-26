@@ -113,6 +113,23 @@ module.exports = {
         );
     },
 
+    cancelarReserva : function (req,res) {
+        pool.query('UPDATE reserva SET "idUsuario" = $1, "idCatalogoEstado" = 1 WHERE "idReserva" = $2',
+        [req.query.idUsuario,req.query.idReserva], 
+            (err,data) => {
+                if(err)
+                {
+                    console.log('Surgió un error: \n',err);
+                    res.sendStatus(500);
+                    res.send({ 'Error' : err });
+                }else{
+                    console.log('Transacción Exitosa');
+                    res.send(true);
+                }
+            }
+        );
+    },
+
     actualizarLogReserva : function (req,res) {
         pool.query('UPDATE log_reserva SET "nombreArchivo" = $1, "fechaSubida" = $2, archivo=$3, "estadoArchivo"=2 WHERE "idLogReserva" = $4',
         [
@@ -152,7 +169,7 @@ module.exports = {
     },
 
     listadoCompletoReservacionesDisponibles : function (req,res) {
-        pool.query('SELECT * FROM listadocompletoreservasadministracion WHERE "idCatalogoEstado" = $1',[req.query.idCatalogoEstado],
+        pool.query('SELECT * FROM listadocompletoreservasadministracionadicional WHERE "idCatalogoEstado" = $1',[req.query.idCatalogoEstado],
             (err,data) => {
                 if(err)
                 {
@@ -168,7 +185,7 @@ module.exports = {
     },
 
     listadoReservasFiltros : function (req,res) {
-        var sentencia = 'SELECT * FROM listadocompletoreservasadministracion WHERE ' + req.body.datos;
+        var sentencia = 'SELECT * FROM listadocompletoreservasadministracionadicional WHERE ' + req.body.datos;
         console.log(sentencia);
         pool.query(sentencia,
             (err,data) => {
@@ -186,7 +203,7 @@ module.exports = {
     },
 
     listadoCompletoReservacionesUsuario : function (req,res) {
-        pool.query('SELECT * FROM listadocompletoreservasadministracion WHERE "idUsuario" = $1',[req.query.idUsuario],
+        pool.query('SELECT * FROM listadocompletoreservasadministracionadicional WHERE "idUsuario" = $1',[req.query.idUsuario],
             (err,data) => {
                 if(err)
                 {
