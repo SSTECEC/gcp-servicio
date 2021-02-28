@@ -62,8 +62,25 @@ module.exports = {
     },
 
     listarReservasExportacion : function (req,res) {
-
         var consulta = "SELECT * FROM listareservaexportacion WHERE " + '"Fecha Reserva"' + " BETWEEN '"+req.body.fechaInicio+"' AND '"+req.body.fechaFin+"'"
+        console.log(consulta);
+        pool.query(consulta,
+            (err,data) => {
+                if(err)
+                {
+                    console.log('Surgió un error: \n',err);
+                    res.sendStatus(500);
+                    res.send({ 'Error' : err });
+                }else{
+                    console.log('Transacción Exitosa');
+                    res.send(data.rows);
+                }
+            }
+        );
+    },
+
+    listarReservasExportacionDescarga : function (req,res) {
+        var consulta = "SELECT * FROM listareservaexportaciondescarga WHERE " + '"Fecha Reserva"' + " BETWEEN '"+req.body.fechaInicio+"' AND '"+req.body.fechaFin+"'"
         console.log(consulta);
         pool.query(consulta,
             (err,data) => {
@@ -203,7 +220,7 @@ module.exports = {
     },
 
     listadoCompletoReservacionesUsuario : function (req,res) {
-        pool.query('SELECT * FROM listadocompletoreservasadministracionadicional WHERE "idUsuario" = $1',[req.query.idUsuario],
+        pool.query('SELECT * FROM listadocompletoreservasadministracionadicional WHERE "idCatalogoEstado" = 2 AND "idUsuario" = $1',[req.query.idUsuario],
             (err,data) => {
                 if(err)
                 {
@@ -217,10 +234,5 @@ module.exports = {
             }
         );
     },
-
-
-    
-
-
 
 }

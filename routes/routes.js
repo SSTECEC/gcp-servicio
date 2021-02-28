@@ -37,6 +37,7 @@ router.get('/listarInsumos', controladores.insumos.listarInsumos);
 router.get('/listarDepartamentoInsumos', controladores.departamentoinsumos.listarDepartamentoInsumos);
 router.get('/listarRegistrosInsumos', controladores.departamentoinsumos.listarRegistrosInsumos);
 router.get('/listarDetalleInsumos', controladores.insumos.listarDetalleInsumos);
+router.get('/listarDetalleInsumosDepartamento', controladores.insumos.listarDetalleInsumosDepartamento);
 router.get('/listarUsuarios', controladores.usuario.listarUsuarios);
 router.get('/listarUsuarioEspecifico', controladores.usuario.listarUsuarioEspecifico);
 router.get('/listarRoles', controladores.rol.listarRoles);
@@ -84,6 +85,7 @@ router.post('/actualizarInsumoValores', controladores.insumos.actualizarInsumoVa
 router.post('/guardarLogReserva', controladores.reserva.guardarLogReserva);
 router.post('/guardarReserva', controladores.reserva.guardarReserva);
 router.post('/listarReservasExportacion', controladores.reserva.listarReservasExportacion);
+router.post('/listarReservasExportacionDescarga', controladores.reserva.listarReservasExportacionDescarga);
 router.post('/actualizarLogReserva', controladores.reserva.actualizarLogReserva);
 router.post('/listadoReservasFiltros', controladores.reserva.listadoReservasFiltros);
 

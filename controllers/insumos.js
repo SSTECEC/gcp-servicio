@@ -132,6 +132,21 @@ module.exports = {
         );
     },
 
+    listarDetalleInsumosDepartamento: function (req, res) {
+        pool.query('SELECT * FROM listardetalleinsumosdepartamento WHERE "idDepartamento" = $1 ORDER BY "idDetalleInsumo" ', [req.query.idDepartamento],
+            (err, data) => {
+                if (err) {
+                    console.log('Surgió un error: \n', err);
+                    res.sendStatus(500);
+                    res.send({ 'Error': err });
+                } else {
+                    console.log('Transacción Exitosa');
+                    res.send(data.rows);
+                }
+            }
+        );
+    },
+
     cambiarEstadoDetalleInsumo: function (req, res) {
 
         pool.query('SELECT * FROM insumos WHERE "idInsumo" = $1 AND estado = 1', [req.body.idInsumo],

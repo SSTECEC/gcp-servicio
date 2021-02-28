@@ -37,7 +37,7 @@ module.exports = {
     },
 
     listarTipoDepartamentoCambiable : function (req,res) {
-        pool.query('SELECT * FROM tipo_departamento WHERE "idTipoDepartamento" = 9 OR "idTipoDepartamento" = 10 AND estado = 1 ORDER BY "idTipoDepartamento"',
+        pool.query('SELECT * FROM tipo_departamento WHERE "idTipoDepartamento" = 1 OR "idTipoDepartamento" = 2 AND estado = 1 ORDER BY "idTipoDepartamento"',
             (err,data) => {
                 if(err)
                 {
